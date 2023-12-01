@@ -1,0 +1,390 @@
+{
+	"asset":
+	{
+		"version": "2.0",
+		"generator": "Unreal Engine 5.2.1"
+	},
+	"scene": 0,
+	"accessors": [
+		{
+			"bufferView": 0,
+			"count": 8400,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 1,
+			"count": 1761,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -1, 0.652489245, -0.573889136 ],
+			"max": [ 1, 0.702024996, 1.3034867 ]
+		},
+		{
+			"bufferView": 2,
+			"count": 1761,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 3,
+			"count": 1761,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 4,
+			"count": 1761,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 5,
+			"count": 1761,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 6,
+			"count": 3516,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 7,
+			"count": 754,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.997462273, 0.00129874004, -0.57065016 ],
+			"max": [ 0.996790648, 0.683835983, 1.3002466 ]
+		},
+		{
+			"bufferView": 8,
+			"count": 754,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 9,
+			"count": 754,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 10,
+			"count": 754,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 11,
+			"count": 754,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 12,
+			"count": 1692,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 13,
+			"count": 336,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.998634994, 6.04594425e-05, -0.396521986 ],
+			"max": [ 0.996434689, 0.00707500242, 1.29422081 ]
+		},
+		{
+			"bufferView": 14,
+			"count": 336,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 15,
+			"count": 336,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 16,
+			"count": 336,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 17,
+			"count": 336,
+			"type": "VEC2",
+			"componentType": 5126
+		}
+	],
+	"buffers": [
+		{
+			"uri": "bureau.bin",
+			"byteLength": 186872
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 16800,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 21132,
+			"byteOffset": 16800,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 21132,
+			"byteOffset": 37932,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 28176,
+			"byteOffset": 59064,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14088,
+			"byteOffset": 87240,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14088,
+			"byteOffset": 101328,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 7032,
+			"byteOffset": 115416,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 9048,
+			"byteOffset": 122448,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 9048,
+			"byteOffset": 131496,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 12064,
+			"byteOffset": 140544,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 6032,
+			"byteOffset": 152608,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 6032,
+			"byteOffset": 158640,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 3384,
+			"byteOffset": 164672,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 4032,
+			"byteOffset": 168056,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 4032,
+			"byteOffset": 172088,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 5376,
+			"byteOffset": 176120,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 2688,
+			"byteOffset": 181496,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 2688,
+			"byteOffset": 184184,
+			"target": 34962
+		}
+	],
+	"images": [
+		{
+			"uri": "MI_MelamineWhite_MetallicRoughness.png"
+		},
+		{
+			"uri": "M_Rubber_MetallicRoughness.png"
+		},
+		{
+			"uri": "M_Rubber_Normal.png"
+		},
+		{
+			"uri": "T_Melamine_N.png"
+		}
+	],
+	"materials": [
+		{
+			"name": "MI_MelamineWhite",
+			"pbrMetallicRoughness":
+			{
+				"baseColorFactor": [ 0.305151999, 0.317707986, 0.286267996, 1 ],
+				"metallicRoughnessTexture":
+				{
+					"index": 0
+				}
+			},
+			"normalTexture":
+			{
+				"index": 1
+			}
+		},
+		{
+			"name": "MI_MelamineSecondColor",
+			"pbrMetallicRoughness":
+			{
+				"baseColorFactor": [ 0.0923390016, 0.109816998, 0.119791999, 1 ],
+				"metallicRoughnessTexture":
+				{
+					"index": 2
+				}
+			},
+			"normalTexture":
+			{
+				"index": 1
+			}
+		},
+		{
+			"name": "M_Rubber",
+			"pbrMetallicRoughness":
+			{
+				"baseColorFactor": [ 0.010416667, 0.010416667, 0.010416667, 1 ],
+				"metallicRoughnessTexture":
+				{
+					"index": 3
+				}
+			},
+			"normalTexture":
+			{
+				"index": 4
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "SM_ExecutiveDesk",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 1,
+						"NORMAL": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4,
+						"TEXCOORD_1": 5
+					},
+					"indices": 0,
+					"material": 0
+				},
+				{
+					"attributes":
+					{
+						"POSITION": 7,
+						"NORMAL": 8,
+						"TANGENT": 9,
+						"TEXCOORD_0": 10,
+						"TEXCOORD_1": 11
+					},
+					"indices": 6,
+					"material": 1
+				},
+				{
+					"attributes":
+					{
+						"POSITION": 13,
+						"NORMAL": 14,
+						"TANGENT": 15,
+						"TEXCOORD_0": 16,
+						"TEXCOORD_1": 17
+					},
+					"indices": 12,
+					"material": 2
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "ExecutiveDesk",
+			"translation": [ 2.12440181, 0.199997246, -0.419432908 ],
+			"rotation": [ -0, -1, 0, 5.32632214e-07 ],
+			"mesh": 0
+		}
+	],
+	"samplers": [
+		{
+			"minFilter": 9987,
+			"magFilter": 9729
+		}
+	],
+	"scenes": [
+		{
+			"name": "tests",
+			"nodes": [ 0 ]
+		}
+	],
+	"textures": [
+		{
+			"name": "MI_MelamineWhite_MetallicRoughness",
+			"sampler": 0,
+			"source": 0
+		},
+		{
+			"name": "T_Melamine_N",
+			"sampler": 0,
+			"source": 3
+		},
+		{
+			"name": "MI_MelamineSecondColor_MetallicRoughness",
+			"sampler": 0,
+			"source": 0
+		},
+		{
+			"name": "M_Rubber_MetallicRoughness",
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"name": "M_Rubber_Normal",
+			"sampler": 0,
+			"source": 2
+		}
+	]
+}
