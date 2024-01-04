@@ -1,233 +1,290 @@
-// Bureau + CV
-
 import * as THREE from "three";
 
-import { OrbitControls } from "./node_modules/three/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "./node_modules/three/examples/jsm/loaders/GLTFLoader.js";
-import { RGBELoader } from "./node_modules/three/examples/jsm/loaders/RGBELoader.js";
-import {
-  CSS3DRenderer,
-  CSS3DObject,
-} from "./node_modules/three/examples/jsm/renderers/CSS3DRenderer.js";
+      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+      import { RGBELoader } from "./node_modules/three/examples/jsm/loaders/RGBELoader.js";
+      import { OrbitControls } from "./node_modules/three/examples/jsm/controls/OrbitControls.js";
+      import {
+        CSS3DRenderer,
+        CSS3DObject,
+      } from "./node_modules/three/examples/jsm/renderers/CSS3DRenderer.js";
 
-let camera, scene, renderer, renderer2;
-let group;
 
-var Element = function (x, y, z, ry) {
-  var div = document.createElement("div");
-  div.style.width = "505px";
-  div.style.height = "300px";
-  div.style.backgroundColor = "#000";
+      let camera, scene, renderer, renderer2, clock;
 
-  var iframe = document.createElement("iframe");
-  iframe.style.width = "505px";
-  iframe.style.height = "300px";
-  iframe.style.border = "0px";
-  iframe.src = ["CV 3D/index.html"].join("");
-  div.appendChild(iframe);
+      init();
+      animate();
 
-  var object = new CSS3DObject(div);
-  object.position.set(x, y, z);
-  object.rotation.y = ry;
-  object.scale.set(0.001, 0.001, 0.001);
+      
 
-  return object;
-};
+      function init() {
+        const container = document.createElement("div");
+        document.body.appendChild(container);
+        camera = new THREE.PerspectiveCamera(
+          45,
+          window.innerWidth / window.innerHeight,
+          1,
+          1000
+        );
+        camera.position.set(2, 3, -6);
+        camera.lookAt(0, 1, 0);
 
-var ElementFondCV = function (x, y, z, ry) {
-  var fondCV = document.createElement("div");
-  fondCV.style.width = "505px";
-  fondCV.style.height = "300px";
-  fondCV.style.backgroundColor = "#000";
-  var fond = new CSS3DObject(fondCV);
-  fond.rotation.y = ry;
-  fond.position.set(x, y, z);
-  fond.scale.set(0.001, 0.001, 0.001);
-  return fond;
-};
+        clock = new THREE.Clock();
 
-init();
-render();
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xa0a0a0);
+        scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
 
-function init() {
-  const container = document.createElement("div");
-  document.body.appendChild(container);
+        const hemiLight = new THREE.HemisphereLight(0xffffff, 0x8d8d8d, 3);
+        hemiLight.position.set(0, 20, 0);
+        scene.add(hemiLight);
 
-  camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    0.25,
-    20
-  );
-  camera.position.set(-1, 0.8, 0.9);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 3);
+        dirLight.position.set(6, 10, 10);
+        dirLight.castShadow = true;
+        scene.add(dirLight);
 
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
-  renderer2 = new CSS3DRenderer();
-  renderer2.setSize(window.innerWidth, window.innerHeight);
-  // Chargement des objets 3D
+        // scene.add(new THREE.CameraHelper(dirLight.shadow.camera));
 
-  new RGBELoader()
-    .setPath("textures/")
-    .load("royal_esplanade_1k.hdr", function (texture) {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      scene.environment = texture;
+        // ground
 
-      const gltfLoader = new GLTFLoader().setPath("obj/");
+        const mesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(200, 200),
+          new THREE.MeshPhongMaterial({ color: 0xcbcbcb, depthWrite: false })
+        );
+        mesh.rotation.x = -Math.PI / 2;
+        mesh.position.y = -0.5
+        mesh.receiveShadow = true;
+        scene.add(mesh);
 
-      gltfLoader.load("ecran.gltf", function (ecran) {
-        ecran.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
-        ecran.scene.position.set(2.2, -0.87, -0.3);
-        scene.add(ecran.scene);
-        render();
-      });
+        // Chargement des objets sur le bureau
 
-      gltfLoader.load("lampe.gltf", function (lampe) {
-        lampe.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
-        lampe.scene.position.set(2, -0.87, -0.5);
-        scene.add(lampe.scene);
-        render();
-      });
+        new RGBELoader()
+          .setPath("textures/")
+          .load("royal_esplanade_1k.hdr", function (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.environment = texture;
 
-      gltfLoader.load("clavier.gltf", function (clavier) {
-        clavier.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
-        clavier.scene.position.set(2.2, -0.87, -0.3);
-        scene.add(clavier.scene);
-        render();
-      });
+            const gltfLoader = new GLTFLoader().setPath("obj/");
 
-      gltfLoader.load("souris.gltf", function (souris) {
-        souris.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
-        souris.scene.position.set(2.15, -0.87, -0.3);
-        scene.add(souris.scene);
-        render();
-      });
+            gltfLoader.load("ecran.gltf", function (ecran) {
+              ecran.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
+              ecran.scene.position.set(2.2, -0.87, -0.3);
+              ecran.scene.traverse(function (object) {
+                if (object.isMesh) object.castShadow = true;
+              });
+              scene.add(ecran.scene);
+            });
 
-      gltfLoader.load("tapis.gltf", function (tapis) {
-        tapis.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
-        tapis.scene.position.set(2.15, -0.87, -0.3);
-        scene.add(tapis.scene);
-        render();
-      });
+            gltfLoader.load("lampe.gltf", function (lampe) {
+              lampe.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
+              lampe.scene.position.set(2, -0.87, -0.5);
+              lampe.scene.traverse(function (object) {
+                if (object.isMesh) object.castShadow = true;
+              });
+              scene.add(lampe.scene);
+            });
 
-      gltfLoader.load("potACrayon.gltf", function (potACrayon) {
-        potACrayon.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
-        potACrayon.scene.position.set(1.95, -0.87, -0.5);
-        scene.add(potACrayon.scene);
-        render();
-      });
-    });
+            gltfLoader.load("clavier.gltf", function (clavier) {
+              clavier.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
+              clavier.scene.position.set(2.2, -0.87, -0.3);
+              clavier.scene.traverse(function (object) {
+                if (object.isMesh) object.castShadow = true;
+              });
+              scene.add(clavier.scene);
+            });
 
-  // Setting du renderer
+            gltfLoader.load("souris.gltf", function (souris) {
+              souris.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
+              souris.scene.position.set(2.15, -0.87, -0.3);
+              souris.scene.traverse(function (object) {
+                if (object.isMesh) object.castShadow = true;
+              });
+              scene.add(souris.scene);
+            });
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1;
-  renderer.shadowMap.enabled = true;
+            gltfLoader.load("tapis.gltf", function (tapis) {
+              tapis.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
+              tapis.scene.position.set(2.15, -0.87, -0.3);
+              tapis.scene.traverse(function (object) {
+                if (object.isMesh) object.castShadow = true;
+              });
+              scene.add(tapis.scene);
+            });
 
-  container.appendChild(renderer.domElement);
-  container.appendChild(renderer2.domElement);
+            gltfLoader.load("potACrayon.gltf", function (potACrayon) {
+              potACrayon.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
+              potACrayon.scene.position.set(1.95, -0.87, -0.5);
+              potACrayon.scene.traverse(function (object) {
+                if (object.isMesh) object.castShadow = true;
+              });
+              scene.add(potACrayon.scene);
+            });
+          });
 
-  // Creation du bureau
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer2 = new CSS3DRenderer();
+        renderer2.setSize(window.innerWidth, window.innerHeight);
+        const controls = new OrbitControls(camera, renderer2.domElement);
+        
 
-  const textureLoader = new THREE.TextureLoader();
-  const geometryTable = new THREE.BoxGeometry(1.5, 0.05, 0.6);
-  const geometryPied = new THREE.BoxGeometry(0.05, 0.5, 0.5);
-  const geometryFond = new THREE.BoxGeometry(1.4, 0.2, 0.05);
-  const material = new THREE.MeshBasicMaterial({
-    map: textureLoader.load("./obj/bois.jpg"),
-  });
-  const table = new THREE.Mesh(geometryTable, material);
-  const pied1 = new THREE.Mesh(geometryPied, material);
-  const pied2 = new THREE.Mesh(geometryPied, material);
-  const fond = new THREE.Mesh(geometryFond, material);
-  pied1.position.set(0.7, -0.25, 0);
-  pied2.position.set(-0.7, -0.25, 0);
-  fond.position.set(0, -0.2, -0.2);
-  scene.add(table);
-  scene.add(pied1);
-  scene.add(pied2);
-  scene.add(fond);
+        container.appendChild(renderer.domElement);
+        container.appendChild(renderer2.domElement);
 
-  CreationMurBureau();
 
-  // Création du CV
+        window.addEventListener("resize", onWindowResize);
 
-  var group = new THREE.Group();
-  group.add(new Element(-0.275, 0.26, -0.06, 0.075));
-  group.add(new ElementFondCV(-0.275, 0.26, -0.062, 0.075));
+        // Creation du bureau
+
+        CreationBureau()
+
+        let bulbLight = new THREE.PointLight(0xffee88, 1, 100, 1);
+        // let bulbMat = new THREE.MeshStandardMaterial({
+        //   emissive: 0xffffee,
+        //   emissiveIntensity: 1,
+        //   color: 0x000000,
+        // });
+        // bulbLight.add(new THREE.Mesh(bulbGeometry, bulbMat));
+        bulbLight.position.set(0.27, 0.41, 0.02);
+        // bulbLight.castShadow = true;
+        scene.add(bulbLight);
+
+        CreationMurBureau();
+
+        CreationCV();
+      }
+
+      function CreationBureau() {
+        const textureLoader = new THREE.TextureLoader();
+        const geometryTable = new THREE.BoxGeometry(1.5, 0.05, 0.6);
+        const geometryPied = new THREE.BoxGeometry(0.05, 0.5, 0.5);
+        const geometryFond = new THREE.BoxGeometry(1.4, 0.2, 0.05);
+        const material = new THREE.MeshPhongMaterial({
+          map: textureLoader.load("./textures/bois.jpg"),
+        });
+        const table = new THREE.Mesh(
+            geometryTable,
+            material
+        );
+        const pied1 = new THREE.Mesh(
+            geometryPied,
+            material
+        );
+        const pied2 = new THREE.Mesh(
+            geometryPied,
+            material
+        );
+        const fond = new THREE.Mesh(geometryFond, material);
+        pied1.position.set(0.7, -0.25, 0);
+        pied2.position.set(-0.7, -0.25, 0);
+        fond.position.set(0, -0.2, -0.2);
+        table.castShadow = true;
+        table.receiveShadow = true;
+        pied1.castShadow = true;
+        pied1.receiveShadow = true;
+        pied2.castShadow = true;
+        pied2.receiveShadow = true;
+        scene.add(table);
+        scene.add(pied1);
+        scene.add(pied2);
+        scene.add(fond);
+      }
+
+      function CreationCV() {
+      var CV = function (x, y, z, ry) {
+        var div = document.createElement("div");
+        div.style.width = "505px";
+        div.style.height = "303px";
+        div.style.backgroundColor = "#000";
+
+        var iframe = document.createElement("iframe");
+        iframe.style.width = "505px";
+        iframe.style.height = "303px";
+        iframe.style.border = "0px";
+        iframe.src = ["CV-3D/index.html"].join("");
+        div.appendChild(iframe);
+
+        var object = new CSS3DObject(div);
+        object.position.set(x, y, z);
+        object.rotation.y = ry;
+        object.scale.set(0.001, 0.001, 0.001);
+        console.log(object)
+        return object;
+      };
+        var group = new THREE.Group();
+        group.add(new CV(-0.275, 0.26, -0.061, 0.075));
+    var FondCV = function (x, y, z, ry) {
+        var fondCV = document.createElement("div");
+        fondCV.style.width = "505px";
+        fondCV.style.height = "303px";
+        fondCV.style.backgroundColor = "#000";
+        var fond = new CSS3DObject(fondCV);
+        fond.rotation.y = ry;
+        fond.position.set(x, y, z);
+        fond.scale.set(0.001, 0.001, 0.001);
+        return fond;
+    };
+  group.add(new FondCV(-0.275, 0.26, -0.062, 0.075));
   scene.add(group);
 
   var blocker = document.getElementById("blocker");
   blocker.style.display = "none";
+      }
 
-  // Ajout de la lumiére
+      function CreationMurBureau() {
+        const geometryMurFond = new THREE.BoxGeometry(4.5, 2, 0.1);
+        const geometrySol = new THREE.BoxGeometry(4.5, 0.2, 1.8);
+        const geometryMurDroit1 = new THREE.BoxGeometry(0.1, 2, 0.4);
+        const geometryMurDroit2 = new THREE.BoxGeometry(0.1, 0.6, 1.8);
+        
+        // const murFond = new THREE.Mesh(geometryMurFond, couleur2);
+        const murFond = new THREE.Mesh(
+            geometryMurFond,
+            new THREE.MeshPhongMaterial({color: 0xcccbff})
+        );
+        murFond.receiveShadow = true;
+        // const sol = new THREE.Mesh(geometrySol, couleur1);
+        const sol = new THREE.Mesh(
+            geometrySol,
+            new THREE.MeshPhongMaterial({ color: 0xbebebe})
+        );
+        sol.receiveShadow = true;
+        const murDroit1 = new THREE.Mesh(
+            geometryMurDroit1,
+            new THREE.MeshPhongMaterial({ color: 0xeeeeee})
+        );
+        murDroit1.receiveShadow = true;
+        const murDroit2 = new THREE.Mesh(
+            geometryMurDroit2,
+            new THREE.MeshPhongMaterial({ color: 0xeeeeee})
+        );
+        murDroit2.receiveShadow = true;
+        murFond.position.set(-1, 0.5, -0.45);
+        sol.position.set(-1, -0.6, 0.4);
+        murDroit1.position.set(1.2, 0.5, -0.3);
+        murDroit2.position.set(1.2, -0.2, 0.4);
 
-  // const bulbGeometry = new THREE.SphereGeometry(0.02, 16, 8);
-  let bulbLight = new THREE.PointLight(0xffee88, 1, 100, 2);
-  // let bulbMat = new THREE.MeshStandardMaterial({
-  //   emissive: 0xffffee,
-  //   emissiveIntensity: 1,
-  //   color: 0x000000,
-  // });
-  // bulbLight.add(new THREE.Mesh(bulbGeometry, bulbMat));
-  bulbLight.position.set(0.27, 0.41, 0.02);
-  bulbLight.castShadow = true;
-  scene.add(bulbLight);
+        
 
-  const controls = new OrbitControls(camera, renderer2.domElement);
-  controls.addEventListener("change", render); // use if there is no animation loop
-  controls.minDistance = 1;
-  controls.maxDistance = 10;
-  controls.target.set(0, 0, 0);
-  controls.update();
+        scene.add(murFond);
+        scene.add(sol);
+        scene.add(murDroit1);
+        scene.add(murDroit2);
+      }
 
-  group = new THREE.Group();
-  scene.add(group);
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer2.setSize(window.innerWidth, window.innerHeight);
+        renderer.render(scene, camera);
+        renderer2.render(scene, camera);
+      }
 
-  window.addEventListener("resize", onWindowResize);
-}
-
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer2.setSize(window.innerWidth, window.innerHeight);
-
-  render();
-}
-
-function render() {
-  renderer.render(scene, camera);
-  renderer2.render(scene, camera);
-}
-
-function CreationMurBureau() {
-  const geometryMurFond = new THREE.BoxGeometry(4.5, 2, 0.1);
-  const geometrySol = new THREE.BoxGeometry(4.5, 0.2, 1.8);
-  const geometryMurDroit1 = new THREE.BoxGeometry(0.1, 2, 0.4);
-  const geometryMurDroit2 = new THREE.BoxGeometry(0.1, 0.6, 1.8);
-  const couleur1 = new THREE.MeshBasicMaterial({
-    color: 0xd9dade,
-  });
-  const couleur2 = new THREE.MeshBasicMaterial({
-    color: 0xc7cbd1,
-  });
-  const couleur3 = new THREE.MeshBasicMaterial({
-    color: 0xccced1,
-  });
-  const murFond = new THREE.Mesh(geometryMurFond, couleur2);
-  const Sol = new THREE.Mesh(geometrySol, couleur1);
-  const murDroit1 = new THREE.Mesh(geometryMurDroit1, couleur3);
-  const murDroit2 = new THREE.Mesh(geometryMurDroit2, couleur3);
-  murFond.position.set(-1, 0.5, -0.45);
-  Sol.position.set(-1, -0.6, 0.4);
-  murDroit1.position.set(1.2, 0.5, -0.3);
-  murDroit2.position.set(1.2, -0.2, 0.4);
-  scene.add(murFond);
-  scene.add(Sol);
-  scene.add(murDroit1);
-  scene.add(murDroit2);
-}
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        renderer2.render(scene, camera);
+      }
