@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>three.js webgl - particles - dynamic - postprocessing</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link type="text/css" rel="stylesheet" href="main.css" />
+  </head>
+  <body style='margin:0;'>
+    <div id="container"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../build/three.module.js",
+          "three/addons/": "./jsm/"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import * as THREE from "three";
+
+      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+      import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+      import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+      import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
+      import { BloomPass } from "three/addons/postprocessing/BloomPass.js";
+      import { FilmPass } from "three/addons/postprocessing/FilmPass.js";
+      import { FocusShader } from "three/addons/shaders/FocusShader.js";
+      import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
+      import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+      import { RGBELoader } from "./node_modules/three/examples/jsm/loaders/RGBELoader.js";
+
+      let camera, scene, renderer, mesh;
+
+      let parent;
+
+      const meshes = [],
+        clonemeshes = [];
+
+      let composer, effectFocus;
+
+      const clock = new THREE.Clock();
+
+      init();
+      animate();
+
+      function init() {
+        const container = document.querySelector("#container");
+
+        camera = new THREE.PerspectiveCamera(
+          20,
+          window.innerWidth / window.innerHeight,
+          1,
+          50000
+        );
+        camera.position.set(0, 700, 7000);
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000104);
+        scene.fog = new THREE.FogExp2(0x000104, 0.0000675);
+
+        camera.lookAt(scene.position);
+
+        const loader = new OBJLoader();
+
+        const gltfLoader = new GLTFLoader();
+        gltfLoader.load("./obj/globe.gltf", function (lampe) {
+          const positions = combineBuffer(lampe.scene, "position");
+
+          createMesh(positions, scene, 1900, 250, -350, 2500, 0x0077ff);
+        });
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.autoClear = false;
+        container.appendChild(renderer.domElement);
+
+        parent = new THREE.Object3D();
+        scene.add(parent);
+
+        // postprocessing
+
+        const renderModel = new RenderPass(scene, camera);
+        const effectBloom = new BloomPass(0.75);
+        const effectFilm = new FilmPass();
+
+        effectFocus = new ShaderPass(FocusShader);
+
+        effectFocus.uniforms["screenWidth"].value =
+          window.innerWidth * window.devicePixelRatio;
+        effectFocus.uniforms["screenHeight"].value =
+          window.innerHeight * window.devicePixelRatio;
+
+        const outputPass = new OutputPass();
+
+        composer = new EffectComposer(renderer);
+
+        composer.addPass(renderModel);
+        composer.addPass(effectBloom);
+        composer.addPass(effectFilm);
+        composer.addPass(effectFocus);
+        composer.addPass(outputPass);
+
+        window.addEventListener("resize", onWindowResize);
+      }
+
+      function combineBuffer(model, bufferName) {
+        let count = 0;
+
+        model.traverse(function (child) {
+          if (child.isMesh) {
+            const buffer = child.geometry.attributes[bufferName];
+
+            count += buffer.array.length;
+          }
+        });
+
+        const combined = new Float32Array(count);
+
+        let offset = 0;
+
+        model.traverse(function (child) {
+          if (child.isMesh) {
+            const buffer = child.geometry.attributes[bufferName];
+            combined.set(buffer.array, offset);  
+          }
+        });
+
+        return new THREE.BufferAttribute(combined, 3);
+      }
+
+	//   Creation des points
+      function createMesh(positions, scene, scale, x, y, z, color) {
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute("position", positions);
+
+        geometry.attributes.position.setUsage(THREE.DynamicDrawUsage);
+
+        const clones = [[0, 0, 0]];
+
+        for (let i = 0; i < clones.length; i++) {
+          const c = i < clones.length - 1 ? 0x252525 : color;
+
+          mesh = new THREE.Points(
+            geometry,
+            new THREE.PointsMaterial({ size: 30, color: c })
+          );
+          mesh.scale.x = mesh.scale.y = mesh.scale.z = scale;
+
+          mesh.position.x = x + clones[i][0];
+          mesh.position.y = y + clones[i][1];
+          mesh.position.z = z + clones[i][2];
+
+          parent.add(mesh);
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        render();
+      }
+
+      function render() {
+        composer.render(0.01);
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        camera.lookAt(scene.position);
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight);
+
+        effectFocus.uniforms["screenWidth"].value =
+          window.innerWidth * window.devicePixelRatio;
+        effectFocus.uniforms["screenHeight"].value =
+          window.innerHeight * window.devicePixelRatio;
+      }
+    </script>
+  </body>
+</html>
