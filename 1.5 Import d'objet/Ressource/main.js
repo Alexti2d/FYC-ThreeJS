@@ -19,7 +19,6 @@ function init() {
   camera.position.set(-1.8, 0.6, 2.7);
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0xa0a0a0);
-  scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
 
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x8d8d8d, 3);
   hemiLight.position.set(0, 20, 0);
@@ -46,23 +45,7 @@ function init() {
   // Creation du bureau
   CreationBureau();
   CreationMurBureau();
-  new RGBELoader()
-          .setPath("textures/")
-          .load("royal_esplanade_1k.hdr", function (texture) {
-            texture.mapping = THREE.EquirectangularReflectionMapping;
-            scene.environment = texture;
-
-            const gltfLoader = new GLTFLoader().setPath("obj/");
-
-            gltfLoader.load("lampe.gltf", function (lampe) {
-              lampe.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
-              lampe.scene.position.set(2, -0.87, -0.5);
-              lampe.scene.traverse(function (object) {
-                if (object.isMesh) object.castShadow = true;
-              });
-              scene.add(lampe.scene);
-            });
-})
+  ImportObjet();
 
 
   window.addEventListener("resize", onWindowResize);
@@ -108,7 +91,23 @@ function CreationMurBureau() {
 }
 
 function ImportObjet() {
-  
+  new RGBELoader()
+    .setPath("textures/")
+    .load("royal_esplanade_1k.hdr", function (texture) {
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      scene.environment = texture;
+
+      const gltfLoader = new GLTFLoader().setPath("obj/");
+
+      gltfLoader.load("lampe.gltf", function (lampe) {
+        lampe.scene.rotation.set(0, (Math.PI / 2) * 90, 0);
+        lampe.scene.position.set(2, -0.87, -0.5);
+        lampe.scene.traverse(function (object) {
+          if (object.isMesh) object.castShadow = true;
+        });
+        scene.add(lampe.scene);
+      });
+})
 }
 
 function CreationBureau() {
