@@ -10,4 +10,4 @@ Deux vidéos de corrections sont mises à disposition (live coding) :
 
 La section 2 s'appuiera aussi sur cet exercice
 
-![](./images/Three-demo.gif)
+![](images/Three-demo.gif)
