@@ -1,190 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>three.js webgl - particles - dynamic - postprocessing</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
-    <link type="text/css" rel="stylesheet" href="main.css" />
-  </head>
-  <body style='margin:0;'>
-    <div id="container"></div>
+	<head>
+		<title>three.js webgl - particles - dynamic - postprocessing</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+	</head>
+	<body style="margin: 0">
 
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "../build/three.module.js",
-          "three/addons/": "./jsm/"
-        }
-      }
-    </script>
+		<div id="container"></div>
 
-    <script type="module">
-      import * as THREE from "three";
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
 
-      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+		<script type="module">
 
-      import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
-      import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
-      import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
-      import { BloomPass } from "three/addons/postprocessing/BloomPass.js";
-      import { FilmPass } from "three/addons/postprocessing/FilmPass.js";
-      import { FocusShader } from "three/addons/shaders/FocusShader.js";
-      import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
-      import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
-      import { RGBELoader } from "./node_modules/three/examples/jsm/loaders/RGBELoader.js";
+			import * as THREE from 'three';
 
-      let camera, scene, renderer, mesh;
+			import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+			import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+			import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+			import { BloomPass } from 'three/addons/postprocessing/BloomPass.js';
+			import { FilmPass } from 'three/addons/postprocessing/FilmPass.js';
+			import { FocusShader } from 'three/addons/shaders/FocusShader.js';
+			import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
+			import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+			import { OrbitControls } from "./node_modules/three/examples/jsm/controls/OrbitControls.js";
 
-      let parent;
 
-      const meshes = [],
-        clonemeshes = [];
+			let camera, scene, renderer, meshHolo;
 
-      let composer, effectFocus;
+			let parentHolo;
 
-      const clock = new THREE.Clock();
+			const meshes = [];
 
-      init();
-      animate();
+			let composer, effectFocus;
 
-      function init() {
-        const container = document.querySelector("#container");
+			init();
+			animate();
 
-        camera = new THREE.PerspectiveCamera(
-          20,
-          window.innerWidth / window.innerHeight,
-          1,
-          50000
-        );
-        camera.position.set(0, 700, 7000);
+			function init() {
 
-        scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x000104);
-        scene.fog = new THREE.FogExp2(0x000104, 0.0000675);
+				const container = document.querySelector( '#container' );
 
-        camera.lookAt(scene.position);
+				camera = new THREE.PerspectiveCamera( 20, window.innerWidth / window.innerHeight, 1, 50000 );
+				camera.position.set( 0, 70, 7000 );
 
-        const loader = new OBJLoader();
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0x000104 );
+				scene.fog = new THREE.FogExp2( 0x000104, 0.0000675 );
 
-        const gltfLoader = new GLTFLoader();
-        gltfLoader.load("./obj/globe.gltf", function (lampe) {
-          const positions = combineBuffer(lampe.scene, "position");
+				camera.lookAt( scene.position );
 
-          createMesh(positions, scene, 1900, 250, -350, 2500, 0x0077ff);
-        });
+				const FBXloader = new FBXLoader();
 
-        renderer = new THREE.WebGLRenderer();
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.autoClear = false;
-        container.appendChild(renderer.domElement);
 
-        parent = new THREE.Object3D();
-        scene.add(parent);
+				FBXloader.load( './obj/globe.fbx', function ( globe ) {
 
-        // postprocessing
+					const positions = combineBuffer( globe, 'position' );
+					createHolo( positions, scene, 10, 1, 1, 0, 0x44ddff );
+					
+				} );
 
-        const renderModel = new RenderPass(scene, camera);
-        const effectBloom = new BloomPass(0.75);
-        const effectFilm = new FilmPass();
 
-        effectFocus = new ShaderPass(FocusShader);
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.autoClear = false;
+				const controls = new OrbitControls(camera, renderer.domElement);
+				container.appendChild( renderer.domElement );
 
-        effectFocus.uniforms["screenWidth"].value =
-          window.innerWidth * window.devicePixelRatio;
-        effectFocus.uniforms["screenHeight"].value =
-          window.innerHeight * window.devicePixelRatio;
+				parentHolo = new THREE.Object3D();
+				scene.add( parentHolo );
 
-        const outputPass = new OutputPass();
 
-        composer = new EffectComposer(renderer);
+				// postprocessing
 
-        composer.addPass(renderModel);
-        composer.addPass(effectBloom);
-        composer.addPass(effectFilm);
-        composer.addPass(effectFocus);
-        composer.addPass(outputPass);
+				const renderModel = new RenderPass( scene, camera );
+				const effectBloom = new BloomPass( 0.75 );
+				const effectFilm = new FilmPass();
 
-        window.addEventListener("resize", onWindowResize);
-      }
+				effectFocus = new ShaderPass( FocusShader );
 
-      function combineBuffer(model, bufferName) {
-        let count = 0;
+				effectFocus.uniforms[ 'screenWidth' ].value = window.innerWidth * window.devicePixelRatio;
+				effectFocus.uniforms[ 'screenHeight' ].value = window.innerHeight * window.devicePixelRatio;
 
-        model.traverse(function (child) {
-          if (child.isMesh) {
-            const buffer = child.geometry.attributes[bufferName];
+				const outputPass = new OutputPass();
 
-            count += buffer.array.length;
-          }
-        });
+				composer = new EffectComposer( renderer );
 
-        const combined = new Float32Array(count);
+				composer.addPass( renderModel );
+				composer.addPass( effectBloom );
+				composer.addPass( effectFilm );
+				composer.addPass( effectFocus );
+				composer.addPass( outputPass );
 
-        let offset = 0;
 
-        model.traverse(function (child) {
-          if (child.isMesh) {
-            const buffer = child.geometry.attributes[bufferName];
-            combined.set(buffer.array, offset);  
-          }
-        });
+				window.addEventListener( 'resize', onWindowResize );
 
-        return new THREE.BufferAttribute(combined, 3);
-      }
+			}
 
-	//   Creation des points
-      function createMesh(positions, scene, scale, x, y, z, color) {
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute("position", positions);
 
-        geometry.attributes.position.setUsage(THREE.DynamicDrawUsage);
+			function onWindowResize() {
 
-        const clones = [[0, 0, 0]];
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
 
-        for (let i = 0; i < clones.length; i++) {
-          const c = i < clones.length - 1 ? 0x252525 : color;
+				camera.lookAt( scene.position );
 
-          mesh = new THREE.Points(
-            geometry,
-            new THREE.PointsMaterial({ size: 30, color: c })
-          );
-          mesh.scale.x = mesh.scale.y = mesh.scale.z = scale;
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				composer.setSize( window.innerWidth, window.innerHeight );
 
-          mesh.position.x = x + clones[i][0];
-          mesh.position.y = y + clones[i][1];
-          mesh.position.z = z + clones[i][2];
+				effectFocus.uniforms[ 'screenWidth' ].value = window.innerWidth * window.devicePixelRatio;
+				effectFocus.uniforms[ 'screenHeight' ].value = window.innerHeight * window.devicePixelRatio;
 
-          parent.add(mesh);
-        }
-      }
+			}
 
-      function animate() {
-        requestAnimationFrame(animate);
-        render();
-      }
+			function combineBuffer( model, bufferName ) {
 
-      function render() {
-        composer.render(0.01);
-      }
+				let count = 0;
 
-      function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+				model.traverse( function ( child ) {
 
-        camera.lookAt(scene.position);
+					if ( child.isMesh ) {
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        composer.setSize(window.innerWidth, window.innerHeight);
+						const buffer = child.geometry.attributes[ bufferName ];
+						count += buffer.array.length;
 
-        effectFocus.uniforms["screenWidth"].value =
-          window.innerWidth * window.devicePixelRatio;
-        effectFocus.uniforms["screenHeight"].value =
-          window.innerHeight * window.devicePixelRatio;
-      }
-    </script>
-  </body>
+					}
+
+				} );
+
+				const combined = new Float32Array( count );
+
+				let offset = 0;
+
+				model.traverse( function ( child ) {
+
+					if ( child.isMesh ) {
+
+						const buffer = child.geometry.attributes[ bufferName ];
+
+						combined.set( buffer.array, offset );
+						offset += buffer.array.length;
+
+					}
+
+				} );
+
+				return new THREE.BufferAttribute( combined, 3 );
+
+			}
+
+			function createHolo( positions, scene, scale, x, y, z, color ) {
+
+				const geometry = new THREE.BufferGeometry();
+				geometry.setAttribute( 'position', positions );
+
+				meshHolo = new THREE.Points( geometry, new THREE.PointsMaterial( { size: 30, color: color } ) );
+
+				// On défini la taille
+				meshHolo.scale.x = meshHolo.scale.y = meshHolo.scale.z = scale;
+
+				// La position
+				meshHolo.position.x = x;
+				meshHolo.position.y = y;
+				meshHolo.position.z = z;
+
+				parentHolo.add( meshHolo );
+
+				
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				composer.render();
+			}
+
+		</script>
+
+	</body>
+
 </html>
