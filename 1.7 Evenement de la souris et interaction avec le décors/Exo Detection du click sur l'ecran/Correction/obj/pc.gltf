@@ -1,0 +1,182 @@
+{
+	"asset":
+	{
+		"version": "2.0",
+		"generator": "Unreal Engine 5.2.1"
+	},
+	"scene": 0,
+	"accessors": [
+		{
+			"bufferView": 0,
+			"count": 924,
+			"type": "SCALAR",
+			"componentType": 5121
+		},
+		{
+			"bufferView": 1,
+			"count": 226,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.191956535, 9.88865868e-05, -0.169855684 ],
+			"max": [ 0.19195652, 0.236329019, 0.117994256 ]
+		},
+		{
+			"bufferView": 2,
+			"count": 226,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 3,
+			"count": 226,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 4,
+			"count": 226,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 5,
+			"count": 226,
+			"type": "VEC2",
+			"componentType": 5126
+		}
+	],
+	"buffers": [
+		{
+			"uri": "pc.bin",
+			"byteLength": 13580
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 924,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 2712,
+			"byteOffset": 924,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 2712,
+			"byteOffset": 3636,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 3616,
+			"byteOffset": 6348,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1808,
+			"byteOffset": 9964,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1808,
+			"byteOffset": 11772,
+			"target": 34962
+		}
+	],
+	"images": [
+		{
+			"uri": "M_Laptop_Normal.png"
+		},
+		{
+			"uri": "T_Laptop_BC.png"
+		},
+		{
+			"uri": "T_Laptop_ORM_Linear.png"
+		}
+	],
+	"materials": [
+		{
+			"name": "M_Laptop",
+			"pbrMetallicRoughness":
+			{
+				"baseColorTexture":
+				{
+					"index": 0
+				},
+				"metallicRoughnessTexture":
+				{
+					"index": 1
+				}
+			},
+			"normalTexture":
+			{
+				"index": 2
+			},
+			"occlusionTexture":
+			{
+				"index": 1
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "SM_Laptop",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 1,
+						"NORMAL": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4,
+						"TEXCOORD_1": 5
+					},
+					"indices": 0,
+					"material": 0
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "SM_Laptop",
+			"translation": [ 1.54167461, 0.902022362, -0.893533051 ],
+			"rotation": [ 0, 0.749202967, -0, 0.662340462 ],
+			"mesh": 0
+		}
+	],
+	"samplers": [
+		{
+			"minFilter": 9987,
+			"magFilter": 9729
+		}
+	],
+	"scenes": [
+		{
+			"name": "tests",
+			"nodes": [ 0 ]
+		}
+	],
+	"textures": [
+		{
+			"name": "T_Laptop_BC",
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"name": "T_Laptop_ORM_Linear",
+			"sampler": 0,
+			"source": 2
+		},
+		{
+			"name": "M_Laptop_Normal",
+			"sampler": 0,
+			"source": 0
+		}
+	]
+}

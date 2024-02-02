@@ -1,0 +1,182 @@
+{
+	"asset":
+	{
+		"version": "2.0",
+		"generator": "Unreal Engine 5.2.1"
+	},
+	"scene": 0,
+	"accessors": [
+		{
+			"bufferView": 0,
+			"count": 4734,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 1,
+			"count": 1813,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.224999994, 1.28800375e-05, -0.0752674565 ],
+			"max": [ 0.224999994, 0.0250415131, 0.0936491564 ]
+		},
+		{
+			"bufferView": 2,
+			"count": 1813,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 3,
+			"count": 1813,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 4,
+			"count": 1813,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 5,
+			"count": 1813,
+			"type": "VEC2",
+			"componentType": 5126
+		}
+	],
+	"buffers": [
+		{
+			"uri": "clavier.bin",
+			"byteLength": 110996
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 9468,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 21756,
+			"byteOffset": 9468,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 21756,
+			"byteOffset": 31224,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 29008,
+			"byteOffset": 52980,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14504,
+			"byteOffset": 81988,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14504,
+			"byteOffset": 96492,
+			"target": 34962
+		}
+	],
+	"images": [
+		{
+			"uri": "MI_Keyboard_Normal.png"
+		},
+		{
+			"uri": "T_Keyboard_BC.png"
+		},
+		{
+			"uri": "T_Keyboard_ORM_Linear.png"
+		}
+	],
+	"materials": [
+		{
+			"name": "MI_Keyboard",
+			"pbrMetallicRoughness":
+			{
+				"baseColorTexture":
+				{
+					"index": 0
+				},
+				"metallicRoughnessTexture":
+				{
+					"index": 1
+				}
+			},
+			"normalTexture":
+			{
+				"index": 2
+			},
+			"occlusionTexture":
+			{
+				"index": 1
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "SM_Keyboard",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 1,
+						"NORMAL": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4,
+						"TEXCOORD_1": 5
+					},
+					"indices": 0,
+					"material": 0
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "SM_Keyboard",
+			"translation": [ 2.45654011, 0.902022064, -0.466013283 ],
+			"rotation": [ -0, -0.99937892, 0, 0.0352420397 ],
+			"mesh": 0
+		}
+	],
+	"samplers": [
+		{
+			"minFilter": 9987,
+			"magFilter": 9729
+		}
+	],
+	"scenes": [
+		{
+			"name": "tests",
+			"nodes": [ 0 ]
+		}
+	],
+	"textures": [
+		{
+			"name": "T_Keyboard_BC",
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"name": "T_Keyboard_ORM_Linear",
+			"sampler": 0,
+			"source": 2
+		},
+		{
+			"name": "MI_Keyboard_Normal",
+			"sampler": 0,
+			"source": 0
+		}
+	]
+}

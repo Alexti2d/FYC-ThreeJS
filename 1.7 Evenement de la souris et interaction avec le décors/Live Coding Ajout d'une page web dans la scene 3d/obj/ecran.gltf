@@ -1,0 +1,182 @@
+{
+	"asset":
+	{
+		"version": "2.0",
+		"generator": "Unreal Engine 5.2.1"
+	},
+	"scene": 0,
+	"accessors": [
+		{
+			"bufferView": 0,
+			"count": 3708,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 1,
+			"count": 845,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.254999995, -0.00234358991, -0.0422348194 ],
+			"max": [ 0.254999995, 0.382830381, 0.0807679072 ]
+		},
+		{
+			"bufferView": 2,
+			"count": 845,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 3,
+			"count": 845,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 4,
+			"count": 845,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 5,
+			"count": 845,
+			"type": "VEC2",
+			"componentType": 5126
+		}
+	],
+	"buffers": [
+		{
+			"uri": "ecran.bin",
+			"byteLength": 54736
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 7416,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 10140,
+			"byteOffset": 7416,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 10140,
+			"byteOffset": 17556,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 13520,
+			"byteOffset": 27696,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 6760,
+			"byteOffset": 41216,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 6760,
+			"byteOffset": 47976,
+			"target": 34962
+		}
+	],
+	"images": [
+		{
+			"uri": "MI_Monitor_Normal.png"
+		},
+		{
+			"uri": "T_Monitor_BC.png"
+		},
+		{
+			"uri": "T_Monitor_ORM_Linear.png"
+		}
+	],
+	"materials": [
+		{
+			"name": "MI_Monitor",
+			"pbrMetallicRoughness":
+			{
+				"baseColorTexture":
+				{
+					"index": 0
+				},
+				"metallicRoughnessTexture":
+				{
+					"index": 1
+				}
+			},
+			"normalTexture":
+			{
+				"index": 2
+			},
+			"occlusionTexture":
+			{
+				"index": 1
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "SM_Monitor",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 1,
+						"NORMAL": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4,
+						"TEXCOORD_1": 5
+					},
+					"indices": 0,
+					"material": 0
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "SM_Monitor",
+			"translation": [ 2.47787261, 0.902021945, -0.226305649 ],
+			"rotation": [ -0, -0.99938941, 0, 0.0349426158 ],
+			"mesh": 0
+		}
+	],
+	"samplers": [
+		{
+			"minFilter": 9987,
+			"magFilter": 9729
+		}
+	],
+	"scenes": [
+		{
+			"name": "tests",
+			"nodes": [ 0 ]
+		}
+	],
+	"textures": [
+		{
+			"name": "T_Monitor_BC",
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"name": "T_Monitor_ORM_Linear",
+			"sampler": 0,
+			"source": 2
+		},
+		{
+			"name": "MI_Monitor_Normal",
+			"sampler": 0,
+			"source": 0
+		}
+	]
+}

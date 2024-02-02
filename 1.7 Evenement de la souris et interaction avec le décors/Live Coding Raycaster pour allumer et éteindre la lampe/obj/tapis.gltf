@@ -1,0 +1,285 @@
+{
+	"asset":
+	{
+		"version": "2.0",
+		"generator": "Unreal Engine 5.2.1"
+	},
+	"scene": 0,
+	"accessors": [
+		{
+			"bufferView": 0,
+			"count": 666,
+			"type": "SCALAR",
+			"componentType": 5121
+		},
+		{
+			"bufferView": 1,
+			"count": 140,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.200157046, 0.002656508, -0.150157049 ],
+			"max": [ 0.200157046, 0.00316141639, 0.150157049 ]
+		},
+		{
+			"bufferView": 2,
+			"count": 140,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 3,
+			"count": 140,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 4,
+			"count": 140,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 5,
+			"count": 140,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 6,
+			"count": 192,
+			"type": "SCALAR",
+			"componentType": 5121
+		},
+		{
+			"bufferView": 7,
+			"count": 72,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.199999988, 3.39944017e-05, -0.150000006 ],
+			"max": [ 0.199999988, 0.0026565569, 0.150000006 ]
+		},
+		{
+			"bufferView": 8,
+			"count": 72,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 9,
+			"count": 72,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 10,
+			"count": 72,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 11,
+			"count": 72,
+			"type": "VEC2",
+			"componentType": 5126
+		}
+	],
+	"buffers": [
+		{
+			"uri": "tapis.bin",
+			"byteLength": 12732
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 666,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1680,
+			"byteOffset": 668,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1680,
+			"byteOffset": 2348,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 2240,
+			"byteOffset": 4028,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1120,
+			"byteOffset": 6268,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1120,
+			"byteOffset": 7388,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 192,
+			"byteOffset": 8508,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 864,
+			"byteOffset": 8700,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 864,
+			"byteOffset": 9564,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1152,
+			"byteOffset": 10428,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 576,
+			"byteOffset": 11580,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 576,
+			"byteOffset": 12156,
+			"target": 34962
+		}
+	],
+	"images": [
+		{
+			"uri": "MI_MousepadFabric_MetallicRoughness.png"
+		},
+		{
+			"uri": "MI_MousepadFabric_Normal.png"
+		},
+		{
+			"uri": "MI_MousepadRuber_MetallicRoughness.png"
+		},
+		{
+			"uri": "MI_MousepadRuber_Normal.png"
+		}
+	],
+	"materials": [
+		{
+			"name": "MI_MousepadFabric",
+			"pbrMetallicRoughness":
+			{
+				"baseColorFactor": [ 0.015625, 0.015625, 0.015625, 1 ],
+				"metallicRoughnessTexture":
+				{
+					"index": 0
+				}
+			},
+			"normalTexture":
+			{
+				"index": 1
+			}
+		},
+		{
+			"name": "MI_MousepadRuber",
+			"pbrMetallicRoughness":
+			{
+				"baseColorFactor": [ 0.010416667, 0.010416667, 0.010416667, 1 ],
+				"metallicRoughnessTexture":
+				{
+					"index": 2
+				}
+			},
+			"normalTexture":
+			{
+				"index": 3
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "SM_Mousepad",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 1,
+						"NORMAL": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4,
+						"TEXCOORD_1": 5
+					},
+					"indices": 0,
+					"material": 0
+				},
+				{
+					"attributes":
+					{
+						"POSITION": 7,
+						"NORMAL": 8,
+						"TANGENT": 9,
+						"TEXCOORD_0": 10,
+						"TEXCOORD_1": 11
+					},
+					"indices": 6,
+					"material": 1
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "SM_Mousepad",
+			"translation": [ 1.99499691, 0.902022362, -0.441838115 ],
+			"rotation": [ -0, -1, 0, 5.32632214e-07 ],
+			"scale": [ 0.692499995, 1, 0.722499967 ],
+			"mesh": 0
+		}
+	],
+	"samplers": [
+		{
+			"minFilter": 9987,
+			"magFilter": 9729
+		}
+	],
+	"scenes": [
+		{
+			"name": "tests",
+			"nodes": [ 0 ]
+		}
+	],
+	"textures": [
+		{
+			"name": "MI_MousepadFabric_MetallicRoughness",
+			"sampler": 0,
+			"source": 0
+		},
+		{
+			"name": "MI_MousepadFabric_Normal",
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"name": "MI_MousepadRuber_MetallicRoughness",
+			"sampler": 0,
+			"source": 2
+		},
+		{
+			"name": "MI_MousepadRuber_Normal",
+			"sampler": 0,
+			"source": 3
+		}
+	]
+}

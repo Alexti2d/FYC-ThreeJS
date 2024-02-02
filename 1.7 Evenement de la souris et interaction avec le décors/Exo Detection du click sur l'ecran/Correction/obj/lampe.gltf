@@ -1,0 +1,182 @@
+{
+	"asset":
+	{
+		"version": "2.0",
+		"generator": "Unreal Engine 5.2.1"
+	},
+	"scene": 0,
+	"accessors": [
+		{
+			"bufferView": 0,
+			"count": 2238,
+			"type": "SCALAR",
+			"componentType": 5123
+		},
+		{
+			"bufferView": 1,
+			"count": 529,
+			"type": "VEC3",
+			"componentType": 5126,
+			"min": [ -0.174541056, 0.000421527162, -0.0497941263 ],
+			"max": [ 0.214999989, 0.410039961, 0.0497941338 ]
+		},
+		{
+			"bufferView": 2,
+			"count": 529,
+			"type": "VEC3",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 3,
+			"count": 529,
+			"type": "VEC4",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 4,
+			"count": 529,
+			"type": "VEC2",
+			"componentType": 5126
+		},
+		{
+			"bufferView": 5,
+			"count": 529,
+			"type": "VEC2",
+			"componentType": 5126
+		}
+	],
+	"buffers": [
+		{
+			"uri": "lampe.bin",
+			"byteLength": 34100
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 4476,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 6348,
+			"byteOffset": 4476,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 6348,
+			"byteOffset": 10824,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 8464,
+			"byteOffset": 17172,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 4232,
+			"byteOffset": 25636,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 4232,
+			"byteOffset": 29868,
+			"target": 34962
+		}
+	],
+	"images": [
+		{
+			"uri": "MI_DeskLamp_Normal.png"
+		},
+		{
+			"uri": "T_DeskLamp_BC.png"
+		},
+		{
+			"uri": "T_DeskLamp_ORM_Linear.png"
+		}
+	],
+	"materials": [
+		{
+			"name": "MI_DeskLamp",
+			"pbrMetallicRoughness":
+			{
+				"baseColorTexture":
+				{
+					"index": 0
+				},
+				"metallicRoughnessTexture":
+				{
+					"index": 1
+				}
+			},
+			"normalTexture":
+			{
+				"index": 2
+			},
+			"occlusionTexture":
+			{
+				"index": 1
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "SM_DeskLamp",
+			"primitives": [
+				{
+					"attributes":
+					{
+						"POSITION": 1,
+						"NORMAL": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4,
+						"TEXCOORD_1": 5
+					},
+					"indices": 0,
+					"material": 0
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "DeskLamp",
+			"translation": [ 1.61319315, 0.902021945, -0.477666765 ],
+			"rotation": [ -0, -0.984808147, 0, 0.173646495 ],
+			"mesh": 0
+		}
+	],
+	"samplers": [
+		{
+			"minFilter": 9987,
+			"magFilter": 9729
+		}
+	],
+	"scenes": [
+		{
+			"name": "tests",
+			"nodes": [ 0 ]
+		}
+	],
+	"textures": [
+		{
+			"name": "T_DeskLamp_BC",
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"name": "T_DeskLamp_ORM_Linear",
+			"sampler": 0,
+			"source": 2
+		},
+		{
+			"name": "MI_DeskLamp_Normal",
+			"sampler": 0,
+			"source": 0
+		}
+	]
+}
