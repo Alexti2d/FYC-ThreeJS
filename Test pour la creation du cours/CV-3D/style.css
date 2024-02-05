@@ -1,0 +1,72 @@
+::selection {
+    background: #F8F2FC;
+    color: #000000;
+}
+
+body {
+    width: 80vw;
+    height: 80vh;
+    margin-left: 10vw;
+  }
+
+ul {
+    list-style-image: url('./_Step\ icon\ base.svg');
+}
+
+.rounded-circle {
+    margin: auto;  
+}
+
+.ligne {
+    border-left: 1px solid #E2E6EE;
+}
+
+
+.list-group-item {
+    border: none;
+    background-color: #F7F9FC;
+}
+
+.premier {
+    background-color: #F8F2FC;
+}
+
+::marker {
+    margin-top: -100px;
+}
+
+.row .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.row .row ul {
+    padding-left: 2rem;
+}
+
+.card {
+    background-position: center;
+    background-size: cover;
+    border: none;
+    text-shadow: 1px 1px 5px #00000060;
+}
+
+.icon-square {
+    border-radius: 5px;
+}
+
+.credit {
+    color: #b6bac1;
+}
+
+/* Add font in ./font */
+@font-face {
+    font-family: 'Cooper Hewitt';
+    src: url('./font/cooper-hewitt/CooperHewitt-Medium.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    font-family: 'Cooper Hewitt';
+}
