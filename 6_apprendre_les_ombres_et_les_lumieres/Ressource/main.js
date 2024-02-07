@@ -47,19 +47,6 @@ function init() {
   CreationMurBureau();
   ImportObjet();
 
-  // Ajout d'une lumiére de lampe
-  const bulbGeometry = new THREE.SphereGeometry( 0.02, 16, 8 );
-  let bulbLight = new THREE.PointLight(0xffee88, 1, 100, 1);
-  let bulbMat = new THREE.MeshStandardMaterial({
-    emissive: 0xffffee,
-    emissiveIntensity: 1,
-    color: 0x000000,
-  });
-  bulbLight.add(new THREE.Mesh(bulbGeometry, bulbMat));
-  bulbLight.position.set(0.27, 0.41, 0.02);
-  // bulbLight.castShadow = true;
-  scene.add(bulbLight);
-
 
   window.addEventListener("resize", onWindowResize);
 }
