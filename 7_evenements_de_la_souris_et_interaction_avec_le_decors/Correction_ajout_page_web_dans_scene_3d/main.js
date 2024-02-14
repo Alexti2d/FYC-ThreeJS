@@ -102,7 +102,7 @@ function init() {
   window.addEventListener("click", (event) => {
     const intersectionLampe = raycaster.intersectObject(maLampe);
     if (intersectionLampe.length > 0) {
-      if (bulbLight.intensity == 0) {
+      if (bulbLight.intensity === 0) {
         bulbLight.intensity = 1;
       } else {
         bulbLight.intensity = 0;
@@ -198,7 +198,7 @@ function CreationBureau() {
   const geometryPied = new THREE.BoxGeometry(0.05, 0.5, 0.5);
   const geometryFond = new THREE.BoxGeometry(1.4, 0.2, 0.05);
 
-  // On crée un matériaux
+  // On crée un material
   const textureLoader = new THREE.TextureLoader();
   const material = new THREE.MeshPhongMaterial({
     map: textureLoader.load("./textures/bois.jpg"),
@@ -210,12 +210,12 @@ function CreationBureau() {
   const pied2 = new THREE.Mesh(geometryPied, material);
   const fond = new THREE.Mesh(geometryFond, material);
 
-  // positionement des Mesh
+  // Positionnement des Mesh
   pied1.position.set(0.7, -0.25, 0);
   pied2.position.set(-0.7, -0.25, 0);
   fond.position.set(0, -0.2, -0.2);
 
-  // On veut qu'il recoivent les ombre et qu'il en emmete
+  // On veut qu'il reçoive les ombres et qu'il en émette.
   table.castShadow = true;
   table.receiveShadow = true;
   pied1.castShadow = true;
@@ -223,7 +223,7 @@ function CreationBureau() {
   pied2.castShadow = true;
   pied2.receiveShadow = true;
 
-  //  On les ajoutes a la scéne
+  //  On les ajoute à la scène
   scene.add(table);
   scene.add(pied1);
   scene.add(pied2);
@@ -365,7 +365,7 @@ function createHolo(positions, scene, scale, x, y, z, color) {
     new THREE.PointsMaterial({ size: 0.015, color: color })
   );
 
-  // On défini la taille
+  // On définit la taille
   meshHolo.scale.x = meshHolo.scale.y = meshHolo.scale.z = scale;
 
   // La rotation
@@ -379,7 +379,7 @@ function createHolo(positions, scene, scale, x, y, z, color) {
   parentHolo.add(meshHolo);
 }
 
-// Detecter la position du curseur
+// Détecter la position du curseur
 function onMouseMove(event) {
   event.preventDefault();
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
