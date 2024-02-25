@@ -1,3 +1,9 @@
+# Installation de Node.Js
+
+Vous pouvez installer Node.Js sur votre machine grâce au lien suivant : https://nodejs.org/en/download
+
+Nous vous laissons choisir le moyen d'installation qui vous convient le mieux et suivre les indications.
+
 # Premiers pas avec ThreeJs
 
 Dans cette section, vous allez apprendre les bases de ThreeJs au travers d'un exercice de découverte.
